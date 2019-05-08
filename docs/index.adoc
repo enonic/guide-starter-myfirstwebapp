@@ -1,5 +1,6 @@
 = Starter: My first web app
 :toc: right
+:imagesdir: media/
 
 A step-by-step tutorial for building your first web application with Enonic XP
 
@@ -13,10 +14,12 @@ During this exercise you will:
 
 * learn about http controllers
 * serve assets
-* create links
-* use libraries
-* try out the https://market.enonic.com/vendors/enonic/router-lib[router library]
+* use of templates
+* error pages
+* trying out the https://market.enonic.com/vendors/enonic/router-lib[router library]
 * and more...
+
+image::nerd2code.svg["Ready, set, code!",width=768px]
 
 == Create project
 
@@ -29,6 +32,8 @@ After deploying, you should find an entry similar to this in the sandbox log:
 
   2019-04-09 13:40:40,765 INFO ... Application [<my.project.name>] installed successfully
 ====
+
+Your XP instance (aka sandbox) should now be running on http://localhost:8080
 
 == Project structure
 
@@ -43,50 +48,120 @@ src/
   main/
     java/ <!--3-->
     resources/ <!--4-->
-      assets/
-      webapp/ <!--5-->
-      services/
+      assets/ <!--5-->
+      webapp/ <!--6-->
 ----
 
-<1> *.gradle files are used by the app build system
+<1> The gradle files are used by the build system
 <2> Contains output files produced by the build
 <3> Optional folder for Java code (used to import sample site in this starter)
 <4> Main location for XP specific project code
-<5> Folder containing the webapp controller
+<5> Static assets such as css and icons are placed here
+<6> Folder containing the root webapp http controller
 
 
-== Webapp controller
+== Webapp
 
-TODO
+To see your current application:
+
+. log in to the XP admin console (http://localhost:8080)
+. open the "Applications" app, and select the listed applications
+. visit the app by clicking the web app link.
+
+TODO Video
 
 
-== Serving assets
+== JS Controller
 
+Our current web app is quite simple.
+To understand how it is build, take a look at the https://developer.enonic.com/docs/xp/stable/runtime/framework[http controller] placed in your project:
 
+  /src/main/resources/webapp/webapp.js
 
+The controller is automatically executed when your web app is being accessed.
+
+Webapp.js is also referencing two asset files. These files can be found in the `/src/main/resources/assets/` folder.
+
+[NOTE]
+====
+The web app engine automatically serves files placed in the `asset/` as if they were located in the root of your web app.
+====
 
 == Using Views
 
-TODO
-
-Our first controller produced HTML directly.
 According to the MVC (Model View Controller) pattern,
 we should separate the View (template) from the controller.
-In this step, we'll upgrade our page component to use the https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf templating engine]:
+Enonic XP supports many different templating engines.
+In this step, we'll use https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]:
 
-. To make sure Thymeleaf is added to our project, we must update the `gradle.build` file.
+. To make sure Thymeleaf is available for our project, we must update the `gradle.build` file.
 Uncomment the following line from the "dependencies" section:
 +
       include "com.enonic.lib:lib-thymeleaf:2.0.0-RC1"
 +
-. Update the `webapp.js` controller with the code below:
+. Create a new file `hello.html` and add it to the `webapp/` folder
 +
-. Redeploy the app:
+.src/main/resources/webapp/hello.html
+[source,html]
+----
+include::../code-samples/webapp-template/hello.html[]
+----
++
+. Then update your controller file to use the new template:
++
+.src/main/resources/webapp/webapp.js
+[source,js]
+----
+include::../code-samples/webapp-template/webapp.js[]
+----
++
+. When finished, redeploy the app. NB! Just start a new shell if your current shell is running the sandbox:
 +
   enonic project deploy
 +
 
-Refresh the site preview, and you should now see: "*Hello world - of views*" instead.
+Refresh your app, and you should see the heading "*Sweet... Views are working too!*".
+
+[TIP]
+====
+A cool feature related to Thymeleaf templates is that they are actually pure HTML.
+Meaning they may be opened directly in your browser.
+Try opening the hello.html file to see for yourself:
+====
+
+image::hello.html.png["Screenshot of template showing dummy heading and html5 logo",width=800px]
+
+== Asset serving
+
+The current approach of asset serving is simple, but has several pitfalls.
+Luckily, XP provides a better solution for serving assets:
+
+* Asset url are created automatically (no need to deal with relative paths)
+* Assets get 1 year cache headers (used by proxies and browsers)
+* Every time you deploy a new app, new url's are generated (no more stale assets)
+
+To use this functionality, we simply need a new template file:
+
+. Update your `hello.html` template with the following content:
++
+.src/main/resources/webapp/hello.html
+[source,js]
+----
+include::../code-samples/webapp-template/hello-assets.html[]
+----
++
+. Redeploy once more:
++
+  enonic project deploy
++
+
+TIP: Try looking at the "Network" tab in your browsers developer tools to see the url and cache headers
+
+== Routing
+
+Routing is a common requirement for web applications.
+In this step we will create a basic server-side router for handling different URLs.
+In addition to the start page, we will create two more pages, and support navigation between them.
 
 
 == Config management
