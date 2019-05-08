@@ -129,7 +129,7 @@ Meaning they may be opened directly in your browser.
 Try opening the hello.html file to see for yourself:
 ====
 
-image::hello.html.png["Screenshot of template showing dummy heading and html5 logo",width=800px]
+image::hello-dummy.png["Screenshot of template showing dummy heading and html5 logo",width=800px]
 
 == Asset serving
 
