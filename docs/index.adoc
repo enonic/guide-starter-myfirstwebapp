@@ -19,21 +19,18 @@ During this exercise you will:
 * trying out the https://market.enonic.com/vendors/enonic/router-lib[router library]
 * and more...
 
-image::nerd2code.svg["Ready, set, code!",width=768px]
+image::nerd2code.svg["Ready, set, code!",width=720px]
 
 == Create project
 
-To set up the development environment and initialize the project, follow the instructions in the https://developer.enonic.com/start[Getting started guide].
+To setup a project locally, simply run the following command:
 
-NOTE: *In step 2:* Choose "*My First Web app*" starter, and create a *new sandbox* for the project
+  enonic project create
 
-====
-After deploying, you should find an entry similar to this in the sandbox log:
+Choose "My first web app" from the list of starters, create a *new XP sandbox* and complete the setup wizard.
 
-  2019-04-09 13:40:40,765 INFO ... Application [<my.project.name>] installed successfully
-====
+NOTE: *Don't have the Enonic CLI?* Visit the https://developer.enonic.com/start[Getting started guide] to install it.
 
-Your XP instance (aka sandbox) should now be running on http://localhost:8080
 
 == Project structure
 
@@ -58,6 +55,22 @@ src/
 <4> Main location for XP specific project code
 <5> Static assets such as css and icons are placed here
 <6> Folder containing the root webapp http controller
+
+== Building and Deploying
+
+To build and deploy the app, run this command from your shell:
+
+  enonic project deploy
+
+Accept starting the sandbox
+
+[NOTE]
+====
+To verify that your app started successfully, you should find an entry similar to this in the sandbox log:
+
+  2019-04-09 13:40:40,765 INFO ... Application [<name.of.your.app>] installed successfully
+====
+
 
 
 == Webapp
