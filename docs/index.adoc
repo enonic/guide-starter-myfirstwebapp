@@ -163,16 +163,16 @@ image::hello-dummy.png["Screenshot of template showing dummy heading and html5 l
 
 == Asset serving
 
-The current approach of asset serving is simple, but has several pitfalls.
-Luckily, XP provides a better solution for serving assets:
+Our approach asset serving is simple, but not optimal.
+XP also provides a more optimized solution for serving assets where:
 
 * Asset url are created automatically (no need to deal with relative paths)
-* Assets get 1 year cache headers (used by proxies and browsers)
+* Assets get "infinite" cache headers (used by proxies and browsers)
 * Every time you deploy a new app, new url's are generated (no more stale assets)
 
-To use this functionality, we simply need a new template file:
+To use this functionality, we simply need to update our view template:
 
-. Update your `hello.html` template with the following content:
+. Update `hello.html` template with the following content:
 +
 .src/main/resources/webapp/hello.html
 [source,js]
@@ -185,7 +185,11 @@ include::../code-samples/webapp-template/hello-assets.html[]
   enonic project deploy
 +
 
-TIP: Try looking at the "Network" tab in your browsers developer tools to see the url and cache headers
+After refreshing your app and inspecting the html5 logo, you should now see something like this:
+
+  <img src="/webapp/webapp.demo/_/asset/webapp.demo:1557487230/html5logo.svg">
+
+TIP: Check out the "Network" tab in your browsers dev tools to see the cache headers
 
 == Routing
 
@@ -194,7 +198,11 @@ Routing, or handling different URLs within your app is a common requirement for 
 In this step we will create a basic server-side router.
 In addition to the start page, we will create two more pages and handle navigation between them.
 
-. Update your `webapp.js` and `hello.html` as follows:
+. This time we will use the https://market.enonic.com/vendors/enonic/router-lib[router library]. Add the following line to the dependencies section of the `build.gradle` file to make it available.
++
+  include "com.enonic.lib:lib-router:2.0.0-RC1"
++
+. Then update your `webapp.js` and `hello.html` as follows:
 +
 .src/main/resources/webapp/webapp.js
 [source,js]
@@ -207,11 +215,6 @@ include::../code-samples/webapp-router/webapp.js[]
 ----
 include::../code-samples/webapp-router/hello.html[]
 ----
-+
-. To make the router library available for our app, add the following line to the dependencies section of the `build.gradle` file.
-+
-  include 'com.enonic.lib:lib-router:2.0.0-RC1'
-+
 . Build and deploy the app once more to see the result:
 +
   enonic project deploy
@@ -219,7 +222,7 @@ include::../code-samples/webapp-router/hello.html[]
 
 Once the app is deployed, reload and enjoy navigating between the pages.
 
-NOTE: The pageUrl() view function is used to dynamically generate server relative URLs for the pages. This eliminates the need for dealing with relative links etc.
+NOTE: Notice the use of `pageUrl()` to dynamically generate server relative URLs for the pages. This eliminates the need for dealing with relative links etc.
 
 
 ////
@@ -282,7 +285,7 @@ XP provides a concept called Vhosts to map the internal XP URI to a public facin
 . Update the `com.enonic.xp.web.vhost.cfg` file in the config/ folder as follows:
 +
 .enonic/sandboxes/<name-of-sanbox>/home/config/com.enonic.xp.web.vhost.cfg
-[source,js]
+[source,properties]
 ----
 include::../code-samples/com.enonic.xp.web.vhost.cfg[]
 ----
