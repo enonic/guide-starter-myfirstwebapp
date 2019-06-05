@@ -19,7 +19,7 @@ image::nerd2code.svg["Ready, set, code!",width=720px]
 
 == Create project
 
-To setup a project locally, simply run the following command:
+To setup a project locally, run the following command:
 
   enonic project create -r starter-myfirstwebapp
 
@@ -30,7 +30,7 @@ NOTE: *Don't have the Enonic CLI?* Visit the https://developer.enonic.com/start[
 
 == Project structure
 
-The project folder created should now contain a project structure, looking something like this:
+The project folder created in the previous step should now contain the following project structure:
 
 [source,files]
 ----
@@ -54,7 +54,7 @@ src/
 
 == Building and Deploying
 
-To build and deploy the app, run this command from your shell:
+From the project folder created (i.e. `myproject/`), run this command:
 
   enonic project deploy
 
