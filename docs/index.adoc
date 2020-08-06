@@ -124,7 +124,7 @@ we should separate the View (template) from the controller.
 Enonic XP supports a variety of templating engines.
 In this step, we'll use https://market.enonic.com/vendors/enonic/thymeleaf-lib[Thymeleaf]:
 
-. To make sure Thymeleaf is available for our project, we must update the `gradle.build` file.
+. To make sure Thymeleaf is available for our project, we must update the `build.gradle` file.
 Uncomment the following line from the "dependencies" section:
 +
       include "com.enonic.lib:lib-thymeleaf:2.0.0"
