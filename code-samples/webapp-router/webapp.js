@@ -7,7 +7,7 @@ router.get('/page/subpage', function() { return renderPage('Gone to sub page ind
 
 function renderPage(message) {
   var model = {
-    title: "Hello router",
+    title: 'Hello router',
     message: message
   };
   return  {

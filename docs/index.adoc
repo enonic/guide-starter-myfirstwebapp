@@ -89,7 +89,7 @@ In your project, you will find the following file:
 [source,js]
 ----
 exports.get = function (req) {
-  var title = "Hello Web app";
+  var title = 'Hello Web app';
   return  {
   body: `
 <html>
