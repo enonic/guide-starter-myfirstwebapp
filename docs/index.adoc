@@ -176,7 +176,7 @@ To use this functionality, we simply need to update our view template:
 . Update `hello.html` template with the following content:
 +
 .src/main/resources/webapp/hello.html
-[source,js]
+[source,html]
 ----
 include::../code-samples/webapp-template/hello-assets.html[]
 ----
@@ -212,7 +212,7 @@ include::../code-samples/webapp-router/webapp.js[]
 ----
 +
 .src/main/resources/webapp/hello.html
-[source,js]
+[source,html]
 ----
 include::../code-samples/webapp-router/hello.html[]
 ----
