@@ -217,6 +217,14 @@ include::../code-samples/webapp-router/webapp.js[]
 ----
 include::../code-samples/webapp-router/hello.html[]
 ----
++
+[TIP]
+====
+If you don't need to validate your Thymeleaf template as pure html you can:
+
+- use inlined expressions [[${variable}]] rather than data-th-text="${variable}"
+- use shorthand th:href rather than data-th-href
+====
 . Build and deploy the app once more to see the result:
 +
   enonic project deploy
