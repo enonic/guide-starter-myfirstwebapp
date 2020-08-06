@@ -180,6 +180,7 @@ To use this functionality, we simply need to update our view template:
 ----
 include::../code-samples/webapp-template/hello-assets.html[]
 ----
+NOTE: Notice the dummy values and attributes are removed. They are only needed if you want to open the Thymeleaf template directly in a browser.
 +
 . Redeploy once more:
 +
