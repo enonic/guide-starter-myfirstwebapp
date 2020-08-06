@@ -144,6 +144,7 @@ include::../code-samples/webapp-template/hello.html[]
 ----
 include::../code-samples/webapp-template/webapp.js[]
 ----
+NOTE: Notice the VIEW "constant". Things that don't change can be set outside the get function.
 +
 . When finished, redeploy the app. NB! Just start a new shell if your current shell is running the sandbox:
 +
