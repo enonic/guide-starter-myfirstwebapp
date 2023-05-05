@@ -34,15 +34,15 @@ The project folder created in the previous step should now contain the following
 
 [source,files]
 ----
-build.gradle <--1-->
+build.gradle // <1>
 settings.gradle
-build/ <--2-->
+build/ // <2>
 src/
   main/
-    java/ <!--3-->
-    resources/ <!--4-->
-      assets/ <!--5-->
-      webapp/ <!--6-->
+    java/ // <3>
+    resources/ // <4>
+      assets/ // <5>
+      webapp/ // <6>
 ----
 
 <1> The gradle files are used by the build system
