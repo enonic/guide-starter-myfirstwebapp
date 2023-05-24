@@ -202,7 +202,7 @@ In addition to the start page, we will create two more pages and handle navigati
 
 . This time we will use the https://market.enonic.com/vendors/enonic/router-lib[router library]. Add the following line to the dependencies section of the `build.gradle` file to make it available.
 +
-  include "com.enonic.lib:lib-router:2.0.0"
+  include "com.enonic.lib:lib-router:3.1.0"
 +
 . Then update your `webapp.js` and `hello.html` as follows:
 +
