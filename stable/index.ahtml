@@ -711,7 +711,16 @@ Uncomment the following line from the "dependencies" section:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/webapp/hello.html</div>
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">Unresolved directive in index.adoc - include::../code-samples/webapp-template/hello.html[]</code></pre>
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title data-th-text="${title}"&gt;Dummy title&lt;/title&gt;
+    &lt;link rel="stylesheet" type="text/css" data-th-href="styles.css" href="../assets/styles.css"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+      &lt;h1 data-th-text="'Sweet... ' + ${message}"&gt;Dummy heading&lt;/h1&gt;
+      &lt;img data-th-src="html5logo.svg" src="../assets/html5logo.svg"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 </div>
 </div>
 </li>
@@ -720,7 +729,20 @@ Uncomment the following line from the "dependencies" section:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/webapp/webapp.js</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">Unresolved directive in index.adoc - include::../code-samples/webapp-template/webapp.js[]</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">var thymeleaf = require('/lib/thymeleaf'); // Load template engine
+
+var VIEW = resolve('hello.html') // Lookup template file
+
+exports.get = function (req) {
+  var model = { // Build model object
+    title: 'Hello Web app',
+    message: 'Views are working too!'
+  };
+
+  return {
+    body: thymeleaf.render(VIEW, model) // Render page
+  };
+};</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -802,7 +824,16 @@ XP also provides a more optimized solution for serving assets where:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/webapp/hello.html</div>
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">Unresolved directive in index.adoc - include::../code-samples/webapp-template/hello-assets.html[]</code></pre>
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title data-th-text="${title}"&gt;&lt;/title&gt;
+    &lt;link rel="stylesheet" type="text/css" data-th-href="${portal.assetUrl({'_path=styles.css'})}"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+      &lt;h1 data-th-text="'Faster assets... '+ ${message}"&gt;&lt;/h1&gt;
+      &lt;img data-th-src="${portal.assetUrl({'_path=html5logo.svg'})}"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -875,13 +906,50 @@ In addition to the start page, we will create two more pages and handle navigati
 <div class="listingblock">
 <div class="title">src/main/resources/webapp/webapp.js</div>
 <div class="content">
-<pre class="highlight"><code class="language-js" data-lang="js">Unresolved directive in index.adoc - include::../code-samples/webapp-router/webapp.js[]</code></pre>
+<pre class="highlight"><code class="language-js" data-lang="js">var thymeleaf = require('/lib/thymeleaf'); // Load template engine
+var router = require('/lib/router')(); // Load router library
+
+router.get('/', function() { return renderPage('Routing FTW'); } );
+router.get('/page', function() { return renderPage('Gone to page, you have'); } );
+router.get('/page/subpage', function() { return renderPage('Gone to sub page indeed, you have'); } );
+
+function renderPage(message) {
+  var model = {
+    title: 'Hello router',
+    message: message
+  };
+  return  {
+    body: thymeleaf.render(resolve('hello.html'), model)
+  }
+};
+
+exports.get = function (req) {
+    return router.dispatch(req);
+};</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">src/main/resources/webapp/hello.html</div>
 <div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">Unresolved directive in index.adoc - include::../code-samples/webapp-router/hello.html[]</code></pre>
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;[[${title}]]&lt;/title&gt;
+    &lt;link
+      rel="stylesheet"
+      th:href="${portal.assetUrl({'_path=styles.css'})}"
+      type="text/css"
+    /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;nav&gt;
+      &lt;a th:href="${portal.pageUrl({'_path=/'})}"&gt;Main&lt;/a&gt;
+      &lt;a th:href="${portal.pageUrl({'_path=page'})}"&gt;Page&lt;/a&gt;
+      &lt;a th:href="${portal.pageUrl({'_path=page/subpage'})}"&gt;Subpage&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;h1&gt;[[${message}]]&lt;/h1&gt;
+    &lt;img th:src="${portal.assetUrl({'_path=html5logo.svg'})}"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -953,7 +1021,18 @@ XP provides a concept called Vhosts to map the internal XP URI to a public facin
 <div class="listingblock">
 <div class="title">enonic/sandboxes/&lt;name-of-sanbox&gt;/home/config/com.enonic.xp.web.vhost.cfg</div>
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">Unresolved directive in index.adoc - include::../code-samples/com.enonic.xp.web.vhost.cfg[]</code></pre>
+<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true
+
+# Vhost to test our new web app
+mapping.mywebapp.host = mywebapp.com
+mapping.mywebapp.source = /
+mapping.mywebapp.target = /webapp/com.example.myproject/
+
+# Still access everything on "localhost"
+mapping.lhost.host = localhost
+mapping.lhost.source = /
+mapping.lhost.target = /
+mapping.lhost.idProvider.system = default</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1036,7 +1115,7 @@ A simplified logging function and many more are included in the <a href="https:/
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 11:38:27 UTC
+Last updated 2023-08-07 09:53:10 UTC
 </div>
 </div>
 </body>
