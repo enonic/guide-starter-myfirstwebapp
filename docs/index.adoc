@@ -56,15 +56,11 @@ src/
 
 From the project folder created (i.e. `myproject/`), run this command:
 
-  enonic project deploy
-
-Accept starting the sandbox
+  enonic dev
 
 [NOTE]
 ====
-To verify that your app started successfully, you should find an entry similar to this in the sandbox log:
-
-  2019-04-09 13:40:40,765 INFO ... Application [<name.of.your.app>] installed successfully
+`enonic dev` command will start your sandbox in detached dev mode, and also execute the `dev` gradle task on the myfirstwebapp starter, providing you a smooth experience while developing with Enonic. For further details on Enonic CLI's dev mode, read the https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[docs].
 ====
 
 
@@ -144,12 +140,8 @@ include::../code-samples/webapp-template/hello.html[]
 ----
 include::../code-samples/webapp-template/webapp.js[]
 ----
+
 NOTE: Notice the VIEW "constant". Things that don't change can be set outside the get function.
-+
-. When finished, redeploy the app. NB! Just start a new shell if your current shell is running the sandbox:
-+
-  enonic project deploy
-+
 
 Refresh your app, and you should see the heading "*Sweet... Views are working too!*".
 
@@ -181,10 +173,6 @@ To use this functionality, we simply need to update our view template:
 include::../code-samples/webapp-template/hello-assets.html[]
 ----
 NOTE: Notice the dummy values and attributes are removed. They are only needed if you want to open the Thymeleaf template directly in a browser.
-+
-. Redeploy once more:
-+
-  enonic project deploy
 +
 
 After refreshing your app and inspecting the html5 logo, you should now see something like this:
@@ -225,12 +213,9 @@ If you don't need to validate your Thymeleaf template as pure html you can:
 - use inlined expressions [[${variable}]] rather than data-th-text="${variable}"
 - use shorthand th:href rather than data-th-href
 ====
-. Build and deploy the app once more to see the result:
-+
-  enonic project deploy
 +
 
-Once the app is deployed, reload and enjoy navigating between the pages.
+Reload and enjoy navigating between the pages.
 
 NOTE: Notice the use of `pageUrl()` to dynamically generate server relative URLs for the pages. This eliminates the need for dealing with relative links etc.
 
