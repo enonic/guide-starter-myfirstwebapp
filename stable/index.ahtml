@@ -579,11 +579,8 @@ src/
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>enonic project deploy</pre>
+<pre>enonic dev</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Accept starting the sandbox</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -593,12 +590,7 @@ src/
 </td>
 <td class="content">
 <div class="paragraph">
-<p>To verify that your app started successfully, you should find an entry similar to this in the sandbox log:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>2019-04-09 13:40:40,765 INFO ... Application [&lt;name.of.your.app&gt;] installed successfully</pre>
-</div>
+<p><code>enonic dev</code> command will start your sandbox in detached dev mode, and also execute the <code>dev</code> gradle task on the myfirstwebapp starter, providing you a smooth experience while developing with Enonic. For further details on Enonic CLI&#8217;s dev mode, read the <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">docs</a>.</p>
 </div>
 </td>
 </tr>
@@ -745,6 +737,9 @@ exports.get = function (req) {
 };</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -757,19 +752,8 @@ Notice the VIEW "constant". Things that don&#8217;t change can be set outside th
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>When finished, redeploy the app. NB! Just start a new shell if your current shell is running the sandbox:</p>
-<div class="literalblock">
-<div class="content">
-<pre>enonic project deploy</pre>
-</div>
-</div>
 <div class="paragraph">
 <p>Refresh your app, and you should see the heading "<strong>Sweet&#8230;&#8203; Views are working too!</strong>".</p>
-</div>
-</li>
-</ol>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -847,14 +831,6 @@ Notice the dummy values and attributes are removed. They are only needed if you 
 </td>
 </tr>
 </table>
-</div>
-</li>
-<li>
-<p>Redeploy once more:</p>
-<div class="literalblock">
-<div class="content">
-<pre>enonic project deploy</pre>
-</div>
 </div>
 <div class="paragraph">
 <p>After refreshing your app and inspecting the html5 logo, you should now see something like this:</p>
@@ -976,16 +952,8 @@ exports.get = function (req) {
 </tr>
 </table>
 </div>
-</li>
-<li>
-<p>Build and deploy the app once more to see the result:</p>
-<div class="literalblock">
-<div class="content">
-<pre>enonic project deploy</pre>
-</div>
-</div>
 <div class="paragraph">
-<p>Once the app is deployed, reload and enjoy navigating between the pages.</p>
+<p>Reload and enjoy navigating between the pages.</p>
 </div>
 </li>
 </ol>
@@ -1115,7 +1083,7 @@ A simplified logging function and many more are included in the <a href="https:/
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-07 09:53:10 UTC
+Last updated 2023-10-31 06:36:19 UTC
 </div>
 </div>
 </body>
